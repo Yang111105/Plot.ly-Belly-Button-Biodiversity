@@ -93,6 +93,7 @@ function popMetadata(sampleId) {
         console.log(infoArray);
 
         let selector = d3.select("#sample-metadata");
+        selector.html("");
         infoArray.forEach(([key,value]) => {
             upperKey = key.toUpperCase();
             selector.append("p")
