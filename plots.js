@@ -1,3 +1,5 @@
+// Part of the codes (Initial function and DrawBarchart function) are from Dom's office hours demo on Dec 11th
+
 console.log("plots.js loaded")
 
 function DrawBarchart(sampleId) {
@@ -84,7 +86,7 @@ function popMetadata(sampleId) {
     d3.json("samples.json").then(data => {
 
         let metadata  = data.metadata;
-        console.log(metadata);
+        // console.log(metadata);
         let metaArray = metadata.filter(m => m.id === parseInt(sampleId));
         let result = metaArray[0];
         let infoArray = Object.entries(result);
@@ -106,6 +108,7 @@ function optionChanged(id) {
     DrawBarchart(id);
     DrawBubblechart(id);
     popMetadata(id);
+    DrawGauge(id);
 }
 
 
@@ -133,8 +136,7 @@ function InitDashboard()
         DrawBarchart(sampleId);
         DrawBubblechart(sampleId);
         popMetadata(sampleId);
-
-
+        DrawGauge(sampleId);
     });
 }
 
