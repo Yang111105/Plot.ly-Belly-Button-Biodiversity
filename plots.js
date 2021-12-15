@@ -13,15 +13,15 @@ function DrawBarchart(sampleId) {
         console.log(result);
 
         let otu_ids = result.otu_ids;
-        let otu_labels = result.otu_labels;
-        let sample_values = result.sample_values;
+        let otu_labels = result.otu_labels.slice(0,10).reverse();
+        let sample_values = result.sample_values.slice(0,10).reverse();
         let yticks = otu_ids.slice(0,10).map(otuId => `OTU ${otuId}`).reverse();
 
         let barData = {
-            x: sample_values.slice(0,10).reverse(),
+            x: sample_values,
             y: yticks,
             type: "bar",
-            text: otu_labels.slice(0,10).reverse(),
+            text: otu_labels,
             orientation:"h"        
         };
 
@@ -54,13 +54,19 @@ function DrawBubblechart(sampleId) {
         let otu_labels = result.otu_labels;
         let sample_values = result.sample_values;
 
+        let max_sample_value = Math.max(...sample_values);
+        let min_sample_value = Math.min(...sample_values);
+        let scale_Y = 450 / (2 * (max_sample_value - min_sample_value));
+        let marker_scaled = sample_values.map(x => x * scale_Y);
+
         let bubbleData = {
             x: otu_ids,
             y: sample_values,
             mode: "markers",
             marker: {
                 color: otu_ids,
-                size: sample_values,
+                size: marker_scaled,
+                colorscale: "Earth"
             },
             text: otu_labels
         };
@@ -69,9 +75,11 @@ function DrawBubblechart(sampleId) {
 
         let bubbleLayout = {
             title: "Bacteria Cultures Found",
+            margin: { t:0 },
+            hovermode: "closest",
+            xaxis: { title: "OTU ID" },
+            yaxis: { title: "Sample Values", range: [-2 * min_sample_value,2 * max_sample_value]},
             margin: { t:30 },
-            xaxis: { title: "OTU IDs" },
-            yaxis: { title: "Sample Values" },
             height: 400,
             width: 1200
         }
