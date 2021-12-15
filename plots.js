@@ -78,7 +78,7 @@ function DrawBubblechart(sampleId) {
             margin: { t:0 },
             hovermode: "closest",
             xaxis: { title: "OTU ID" },
-            yaxis: { title: "Sample Values", range: [-2 * min_sample_value,2 * max_sample_value]},
+            yaxis: { title: "Sample Values", range: [2 * max_sample_value]},
             margin: { t:30 },
             height: 400,
             width: 1200
