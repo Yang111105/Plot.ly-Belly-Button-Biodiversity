@@ -10,5 +10,7 @@ The samples.json is read by using D3 library.
 - A dropdown menu to display the all IDs
 - A horizontal bar chart of top 10 bacteria cultures found
 - A bubble chart that displays each sample
+  
+  *The y scale is designed to be able to fit all bubbles regardless of the size of them
 - Display the selected individual's demographic information
 - A Gauge Chart of selected person's scrubs per week
